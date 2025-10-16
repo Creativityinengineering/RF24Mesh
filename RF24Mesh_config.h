@@ -124,7 +124,7 @@
 #elif defined(XMEGA)
     #include "../../rf24lib/rf24lib/RF24_config.h"
 #else
-    #include <RF24_config.h>
+    #include "../RF24/RF24_config.h"
 #endif
 
 #if defined(RF24MESH_DEBUG_MINIMAL)

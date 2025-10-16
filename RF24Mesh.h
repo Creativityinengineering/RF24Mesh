@@ -39,8 +39,8 @@
     #include <RF24Network/RF24Network.h>
     #define RF24_LINUX
 #else
-    #include <RF24.h>
-    #include <RF24Network.h>
+    #include "../RF24/RF24.h"
+    #include "../RF24Network/RF24Network.h"
     #if defined(ARDUINO_ARCH_NRF52) || defined(ARDUINO_ARCH_NRF52840)
         #include <nrf_to_nrf.h>
     #endif
