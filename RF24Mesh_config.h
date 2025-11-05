@@ -21,7 +21,7 @@
 #endif
 
 // un-comment for non-master nodes not running on ATTiny MCUs
-//#define MESH_NOMASTER
+#define MESH_NOMASTER
 
 /***Advanced User Config***/
 /**
@@ -61,7 +61,7 @@
  * Raising this number can result in a more stable mesh, since nodes can more easily verify that a connection is active
  */
 #ifndef MESH_CONNECTION_CHECK_ATTEMPTS
-    #define MESH_CONNECTION_CHECK_ATTEMPTS 3
+    #define MESH_CONNECTION_CHECK_ATTEMPTS 5
 #endif
 
 #define RF24MESH_CONN_CHECK_PARENT 1
