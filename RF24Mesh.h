@@ -1,4 +1,3 @@
-
 /**
  * @file RF24Mesh.h
  *
@@ -168,6 +167,8 @@ public:
      * ESBMesh::update() to ensure address requests are handled appropriately.
      */
     void DHCP();
+
+    bool updateAddress(uint8_t nodeID, uint16_t address);//Nur fuer Master. Falls der Master die bereits angemeldeten Slaves noch nicht kennt, diese aber hinzugefuegt werden sollen.
 
 #endif
 

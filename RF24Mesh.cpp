@@ -635,6 +635,33 @@ void ESBMesh<network_t, radio_t>::DHCP()
 
 /*****************************************************/
 
+template<class network_t, class radio_t>
+bool ESBMesh<network_t, radio_t>::updateAddress(uint8_t nodeID, uint16_t address) //Falls der Master die bereits angemeldeten Slaves noch nicht kennt, diese aber hinzugefuegt werden sollen.
+{
+    // Prüfen, ob nodeID und Adresse bereits vorhanden sind
+    for (uint8_t i = 0; i < addrListTop; i++) {
+        if (addrList[i].nodeID == nodeID && addrList[i].address == address) {
+            return false; // Bereits vorhanden
+        }
+    }
+    for (uint8_t i = 0; i < addrListTop; i++) {
+        if (addrList[i].address == address) {
+            if(addrList[i].nodeID != nodeID)
+            return false; // andere Node ID hat bereits die selbe Adresse ==> neue Addresse senden TO BE DONE
+        }
+    }
+    // Noch nicht vorhanden: hinzufügen
+    if (addrListTop > 0 && addrListTop % MESH_MEM_ALLOC_SIZE == 0) {
+        addrList = (addrListStruct*)realloc(addrList, (addrListTop + MESH_MEM_ALLOC_SIZE) * sizeof(addrListStruct));
+    }
+    addrList[addrListTop].address = address;
+    addrList[addrListTop++].nodeID = nodeID; //Set the value AND increment Top without another line of code
+    #if defined(__linux) && !defined(__ARDUINO_X86__)
+    saveDHCP();
+    #endif
+    return true;
+}
+
 #endif // !MESH_NOMASTER
 
 template<class network_t, class radio_t>
